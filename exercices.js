@@ -28,3 +28,53 @@ const inventaire = [
 
 
 console.log(tarifPotion("potion_soin", inventaire, 3)); // Affiche 30
+
+
+// FABRICATION POTION
+function fabriquerPotion(idPotion, prix = 10, stock = 1) {
+    // On retourne un objet avec la même structure qu'une potion de l'inventaire
+    return {
+    id: idPotion,
+    prix: prix,
+    stock: stock
+    };
+}
+
+  // Exemple d'utilisation
+console.log(fabriquerPotion("potion_santé", 15, 3));  // Potion avec un prix de 15 et stock de 3
+console.log(fabriquerPotion("potion_rage", 20, 5));   // Potion avec un prix de 20 et stock de 5
+console.log(fabriquerPotion("potion_mana"));          // Potion avec prix par défaut (10) et stock par défaut (1)
+
+
+// AJOUT DE POTIONS
+function ajouterPotion(inventaire, potion) {
+    // On vérifie si la potion existe déjà dans l'inventaire
+    const potionExistante = inventaire.find(p => p.id === potion.id);
+    
+    if (potionExistante) {
+      // Si la potion existe, on met à jour le prix et on ajoute au stock existant
+    potionExistante.prix = potion.prix;
+    potionExistante.stock += potion.stock;
+    } else {
+      // Sinon, on ajoute la nouvelle potion à l'inventaire
+    inventaire.push(potion);
+    }
+
+    // On trie l'inventaire du plus cher au moins cher
+    inventaire.sort((a, b) => b.prix - a.prix);
+}
+
+  // Exemple d'inventaire initial
+let inventaire = [
+    {
+    id: "potion_soin",
+    prix: 10,
+    stock: 5
+    }
+];
+
+  // Exemple d'ajout de potion
+  ajouterPotion(inventaire, fabriquerPotion("potion_rage", 20, 10)); // Ajoute une nouvelle potion
+  ajouterPotion(inventaire, fabriquerPotion("potion_soin", 10, 10)); // Met à jour la potion_soin existante
+
+console.log(inventaire);
