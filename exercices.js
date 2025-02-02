@@ -109,3 +109,41 @@ console.log(potionsEnStock(inventaire));
   // Affichage des potions en rupture de stock (stock === 0)
 console.log("Potions en rupture de stock (stock === 0):");
 console.log(potionsEnRupture(inventaire));
+
+// CUEILLONS LES INGREDIENTS
+
+// Exemple d'un manuel de fabrication global
+const manuel_de_fabrication = {
+    "potion_de_santé": ["herbe", "eau", "pierre"],
+    "potion_de_force": ["racine", "pierre", "sel"],
+    "potion_de_vitesse": ["feuille", "vent", "poudre"]
+};
+
+ // Fonction de fabrication de potion
+function fabriquerPotion(potion, ingredients) {
+    // Vérifie si la potion existe dans le manuel
+    if (!manuel_de_fabrication[potion]) {
+    throw new Error("Potion inconnue");
+    }
+
+    // Récupère la liste des ingrédients nécessaires pour cette potion
+    const ingredientsNecessaires = manuel_de_fabrication[potion];
+
+    // Vérifie si tous les ingrédients nécessaires sont présents dans la liste fournie
+    for (let ingredient of ingredientsNecessaires) {
+    if (!ingredients.includes(ingredient)) {
+        throw new Error('Il manque des ingrédients à cette potion');
+    }
+    }
+
+    // Si tous les ingrédients sont présents, on fabrique la potion
+    return `Potion de ${potion} fabriquée avec succès !`;
+}
+
+  // Exemple d'utilisation
+try {
+    console.log(fabriquerPotion("potion_de_santé", ["herbe", "eau", "pierre"])); // Succès
+    console.log(fabriquerPotion("potion_de_force", ["racine", "pierre"])); // Erreur
+} catch (error) {
+    console.error(error.message);
+}
