@@ -78,3 +78,34 @@ let inventaire = [
   ajouterPotion(inventaire, fabriquerPotion("potion_soin", 10, 10)); // Met à jour la potion_soin existante
 
 console.log(inventaire);
+
+// CHERCHONS LES POTIONS
+// Fonction pour récupérer toutes les potions en stock (stock > 0)
+function potionsEnStock(inventaire) {
+    return inventaire.filter(potion => potion.stock > 0);
+}
+
+  // Fonction pour récupérer toutes les potions en rupture de stock (stock === 0)
+function potionsEnRupture(inventaire) {
+    return inventaire.filter(potion => potion.stock === 0);
+}
+
+  // Exemple d'inventaire
+let inventaire = [
+    { id: "potion_soin", prix: 10, stock: 5 },
+    { id: "potion_rage", prix: 20, stock: 0 },
+    { id: "potion_mana", prix: 15, stock: 3 },
+    { id: "potion_vitesse", prix: 30, stock: 0 }
+];
+
+  // Affichage de l'inventaire initial
+console.log("Inventaire initial:");
+console.log(inventaire);
+
+  // Affichage des potions en stock
+console.log("Potions en stock (stock > 0):");
+console.log(potionsEnStock(inventaire));
+
+  // Affichage des potions en rupture de stock (stock === 0)
+console.log("Potions en rupture de stock (stock === 0):");
+console.log(potionsEnRupture(inventaire));
